@@ -135,7 +135,7 @@ bounds argument must be an object with the following properties
     height: float,
 }
 ```
-A list of key values can be seen here. [Key Values](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)
+Handler is passed through the x and y coordinates of the mouse
 Usage: `this.input.onMouseClick('w', (x, y) => { console.log("The mouse was clicked at position " + x + " " + y) })`
 
 #### getMouse
