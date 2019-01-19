@@ -5,7 +5,7 @@ A simple graphics tool, for react
 ## Example Usage
 ```
 import React, { Component } from 'react'
-import JGraphics from "./JGraphics"
+import JGraphics from "jgraphics"
 
 class MyGame extends JGraphics {
     // Setup is called once
@@ -15,13 +15,13 @@ class MyGame extends JGraphics {
     loop(delta){ /* Any JGraphic method can be used here */ }
 }
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <!-- Shown below are the default props, any can be left out -->
+        { /* Shown below are the default props, any can be left out */ }
         <MyGame fps={60} id="jgraphic-panel" width="800" height="600"/>
-        <!-- Be careful no two panels have the same ID -->
+        { /* Be careful no two panels have the same ID */ }
       </div>
     );
   }

@@ -1,6 +1,6 @@
 export const ExportMap = {
     UNPACK_LOC: "view",
-    MODULE_INIT: (self) => {},
+    MODULE_INIT: (self) => {_set_center(self, 0, 0)},
     setDimensions: _set_dimensions,
     isYAxisUpPositive: _is_y_axis_up_positive,
     setCenter: _set_center,
