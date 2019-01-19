@@ -1,6 +1,6 @@
 {
-  "name": "graph-x",
-  "version": "0.1.0",
+  "name": "jgraphics",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "react": "^16.7.0",
@@ -13,6 +13,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "author": "Jacob Reckhard <jacobrec@live.com> (http://github.com/jacobrec)",
+  "license": "MIT",
   "eslintConfig": {
     "extends": "react-app"
   },
