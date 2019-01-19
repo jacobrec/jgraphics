@@ -105,8 +105,49 @@ Usage: `this.draw.isImageLoaded(require("./logo.png"))`
 
 
 ### Input Methods
-#### isKeyPressed: _is_key_pressed,
-#### onKeyDown: _on_key_down,
-#### onKeyUp: _on_key_up,
-#### onMouseClick: _on_mouse_click,
-#### getMouse: _get_mouse,
+#### Is Key Pressed
+`function isKeyPressed(key)`
+Returns a boolean which indicates if the key is pressed. A list of key values
+can be seen here. [Key Values](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)
+Usage: `this.input.isKeyPressed('w')`
+
+#### On Key Down
+`function onKeyDown(key, handler)`
+Sets an event listener for keydown events.
+A list of key values can be seen here. [Key Values](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)
+Usage: `this.input.onKeyDown('w', () => { console.log("Aaaahhhh") })`
+#### On Key Up
+`function onKeyUp(key, handler)`
+Sets an event listener for keyup events.
+A list of key values can be seen here. [Key Values](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)
+Usage: `this.input.onKeyUp('w', () => { console.log("Aaaahhhh") })`
+
+#### onMouseClick
+`function onMouseClick(handler [, bounds])`
+Sets an event listener for mouse press events. Takes an option bounds argument,
+which specifies a region the mouse has to be within to trigger the event. The
+bounds argument must be an object with the following properties
+```
+{
+    x: float,
+    y: float,
+    width: float,
+    height: float,
+}
+```
+A list of key values can be seen here. [Key Values](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)
+Usage: `this.input.onMouseClick('w', (x, y) => { console.log("The mouse was clicked at position " + x + " " + y) })`
+
+#### getMouse
+`function getMouse()`
+Returns an object with information on the mouse position. The object is in the
+following form.
+```
+{
+    x: float,
+    y: float,
+    isClicked: bool
+}
+```
+Usage: `this.input.getMouse()`
+
