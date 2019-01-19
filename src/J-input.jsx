@@ -25,8 +25,8 @@ function _input_init(self) {
     }
     self._canvas.onmousedown = (e) => { self.input._is_mouse_clicked = true }
     self._canvas.onmouseup = (e) => { self.input._is_mouse_clicked = false }
-    self._canvas.onmouseclick = (e) => {
-        self.input._user_key_listeners.forEach((user) => {
+    self._canvas.onclick = (e) => {
+        self.input._user_click_listeners.forEach((user) => {
             if (self.input._mouse_x > user.bounds.x &&
                 self.input._mouse_x < user.bounds.x + user.bounds.width &&
                 self.input._mouse_y > user.bounds.y &&
@@ -65,7 +65,7 @@ function _on_key_up(self, key, handler) {
 }
 
 function _on_mouse_click(self, handler, bounds = {}) {
-    self.input._user_click_listeners.append({bounds, handler})
+    self.input._user_click_listeners.push({bounds, handler})
 }
 
 function _get_mouse(self) {

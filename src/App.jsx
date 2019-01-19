@@ -11,21 +11,11 @@ class MyGame extends JGraphics {
         this.draw_mode = this.draw.MODE_LINE
         this.draw.background("rgb(49,49,49)")
 
-        this.draw.rectangle(10, 10, 10, 10, "#0099CC")
-        this.draw.ellipse(5, 5, 5, 5, "#0099CC")
-
-        this.draw.triangle(0, 0, 1, 1, 1, 0, "#0099CC")
-        this.draw.triangle(0, 0, 2, 2, 2, 0)
-
-        this.draw.loadImage(require("./logo.png"))
-
-        this.x = 0;
-        this.y = 0;
+        this.draw.rectangle(0, 0, 10, 10, "#0099CC")
+        this.input.onMouseClick((x,y) => console.log(`${x}:${y}`), {x: 0, y: 0, width: 10, height: 10})
     }
 
     loop(delta){
-        //this.draw.image(require("./logo.png"), this.x, this.y, 10, 10)
-        console.log(this.input.isKeyPressed('a'))
     }
 }
 

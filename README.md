@@ -137,6 +137,7 @@ bounds argument must be an object with the following properties
 ```
 Handler is passed through the x and y coordinates of the mouse
 Usage: `this.input.onMouseClick('w', (x, y) => { console.log("The mouse was clicked at position " + x + " " + y) })`
+Usage: `this.input.onMouseClick((x,y) => console.log(`${x}:${y}`), {x: 0, y: 0, width: 10, height: 10})`
 
 #### getMouse
 `function getMouse()`
