@@ -1,68 +1,112 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# JGraphics
+A simple graphics tool, for react
 
-## Available Scripts
 
-In the project directory, you can run:
+## Example Usage
+```
+import React, { Component } from 'react'
+import JGraphics from "./JGraphics"
 
-### `npm start`
+class MyGame extends JGraphics {
+    // Setup is called once
+    setup(){ /* Any JGraphic method can be used here */ }
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    // Loop is called many times based on the fps
+    loop(delta){ /* Any JGraphic method can be used here */ }
+}
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <!-- Shown below are the default props, any can be left out -->
+        <MyGame fps={60} id="jgraphic-panel" width="800" height="600"/>
+        <!-- Be careful no two panels have the same ID -->
+      </div>
+    );
+  }
+}
 
-### `npm test`
+```
+## Methods
+### View Methods
+#### Set Dimensions
+`function setDimensions(width, height)`
+Sets the dimensions used for rendering things. A 1x1 square will look much
+bigger in a 10x10 panel then a 100x100 panel
+Usage: `this.view.setDimensions(80, 60)`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Set Center
+`function setCenter(x, y)`
+Sets the center of the view, by default it is (0, 0)
+Usage: `this.view.setCenter(40, 30)`
 
-### `npm run build`
+#### Is Y Axis Up Positive
+`function isYAxisUpPositive(bool)`
+If true, it will set the y axis so that higher up the screen is higher
+coordinates. Older graphics systems sometimes had the top left corner as (0, 0).
+For that effect, you would need to set this false.
+Usage: `this.view.isYAxisUpPositive(true)`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Graphics Methods
+#### Set Mode
+`function setMode(mode)`
+Switch between line and fill mode. Is fill mode by default
+Usage: `this.draw.setMode(this.draw.MODE_FILL)`
+Usage: `this.draw.setMode(this.draw.MODE_LINE)`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Background
+`function background(color)`
+Sets the background color. You may want to call this at the start of each loop.
+Color may be any valid html color. Eg) "blue", "#0099cc", "rgb(0, 100, 200)"
+Usage: `this.draw.background("blue")`
 
-### `npm run eject`
+#### Ellipse
+`function ellipse(x, y, width, height [, color])`
+Draws an ellipse, centered on (x+width/2, y+height/2). If no colour is provided,
+it will use the last used color, probably the background color. Respects the draw mode
+Usage: `this.draw.ellipse(0, 0, 20, 20, "blue")`
+Usage: `this.draw.ellipse(0, 0, 20, 20)`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Rectangle
+`function rectangle(x, y, width, height [, color])`
+Draws an rectangle, centered on (x+width/2, y+height/2). If no colour is provided,
+it will use the last used color, probably the background color. Respects the
+draw mode
+Usage: `this.draw.rectangle(0, 0, 20, 20, "blue")`
+Usage: `this.draw.rectangle(0, 0, 20, 20)`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Triangle
+`function triangle(x1, y1, x2, y2, x3, y3 [, color])`
+Draws a triangle, at the 3 points. If no colour is provided, it will use the
+last used color, probably the background color. Respects the draw mode
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Usage: `this.draw.triangle(0, 0, 1, 1, 1, 0, "#0099CC")`
+Usage: `this.draw.triangle(0, 0, 2, 2, 2, 0)`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Image
+`function image(imgPath, x, y, width, height)`
+Draws an image, centered on (x+width/2, y+height/2). Images should be loaded
+first with the loadImage function. If the image is not yet loaded, nothing will
+be drawn
+Usage: `this.draw.image(require("./logo.png"), 10, 10, 10, 10)`
 
-## Learn More
+#### Load Image
+`function loadImage(imgPath)`
+Loads an image. This is not instant. It is recommended to load images in setup,
+then draw them in loop
+Usage: `this.draw.image(require("./logo.png"), 10, 10, 10, 10)`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Load Image
+`function isImageLoaded(imgPath)`
+returns true if the image is loaded
+Usage: `this.draw.isImageLoaded(require("./logo.png"))`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Input Methods
+#### isKeyPressed: _is_key_pressed,
+#### onKeyDown: _on_key_down,
+#### onKeyUp: _on_key_up,
+#### onMouseClick: _on_mouse_click,
+#### getMouse: _get_mouse,
