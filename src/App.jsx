@@ -25,7 +25,7 @@ class MyGame extends JGraphics {
 
     loop(delta){
         //this.draw.image(require("./logo.png"), this.x, this.y, 10, 10)
-        console.log(this.input.getMouse())
+        console.log(this.input.isKeyPressed('a'))
     }
 }
 

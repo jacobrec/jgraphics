@@ -21,39 +21,25 @@ export default class JGraphics extends Component{
 
     }
 
-    _unpack_module(src){
-        let dest = src.UNPACK_LOC
-        this[dest] = {}
-        dest = this[dest]
-        const isFunc = (obj) => !!(obj && obj.constructor && obj.call && obj.apply)
-        Object.keys(src).forEach((key) => {
-            dest[key] = isFunc(src[key]) ?
-                (...params) => src[key](this, ...params)
-                : src[key]
-        }, this)
-
-        src.MODULE_INIT(this)
-    }
-
     render(){
         return <canvas id={this._id} width={this._width} height={this._height}></canvas>
     }
-    componentDidMount() {
-        this._unpack_module(jgraphics)
-        this._unpack_module(jview)
-        this._unpack_module(jinput)
 
+    componentDidMount() {
+        this._unpack_all_modules()
         if(!this.state.setup)
             this._setup()
     }
 
-    // Private getters
+
+
 
     get _canvas() { return document.getElementById(this._id) }
     get _context() { return this._canvas.getContext("2d") }
 
 
-    // Private Methods
+
+
     async _setup() {
         await this.setState({ ...this.state, setup: true })
         this.setup()
@@ -68,4 +54,26 @@ export default class JGraphics extends Component{
 
         this.loop(delta/1000)
     }
+
+    _unpack_all_modules(){
+        // TODO: allow all to be started, then return after all are finished
+        this._unpack_module(jgraphics)
+        this._unpack_module(jview)
+        this._unpack_module(jinput)
+    }
+
+    _unpack_module(src){
+        let dest = src.UNPACK_LOC
+        this[dest] = {}
+        dest = this[dest]
+        const isFunc = (obj) => !!(obj && obj.constructor && obj.call && obj.apply)
+        Object.keys(src).forEach((key) => {
+            dest[key] = isFunc(src[key]) ?
+                (...params) => src[key](this, ...params)
+                : src[key]
+        }, this)
+
+        src.MODULE_INIT(this)
+    }
+
 }
