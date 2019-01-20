@@ -20,17 +20,18 @@ export const ExportMap = {
 
 function _input_init(self) {
     self._canvas.onmousemove = function (e) {
-        self.input._mouse_x = self.view._get_world_x(e.clientX)
-        self.input._mouse_y = self.view._get_world_y(e.clientY)
+        self.input._mouse_x = self.view._get_world_x(e.offsetX)
+        self.input._mouse_y = self.view._get_world_y(e.offsetY)
     }
     self._canvas.onmousedown = (e) => { self.input._is_mouse_clicked = true }
     self._canvas.onmouseup = (e) => { self.input._is_mouse_clicked = false }
     self._canvas.onclick = (e) => {
         self.input._user_click_listeners.forEach((user) => {
-            if (self.input._mouse_x > user.bounds.x &&
+            if (!user.bounds || (
+                self.input._mouse_x > user.bounds.x &&
                 self.input._mouse_x < user.bounds.x + user.bounds.width &&
                 self.input._mouse_y > user.bounds.y &&
-                self.input._mouse_y < user.bounds.y + user.bounds.height) {
+                self.input._mouse_y < user.bounds.y + user.bounds.height)) {
                 user.handler(self.input._mouse_x, self.input._mouse_y)
             }
         })
